@@ -6,6 +6,7 @@ Thank you for helping improve local home automation.
 
 - Powerline2MQTT functionality, package documentation and app-store icons: [powerline2mqtt](https://github.com/ChristophKomenda/powerline2mqtt).
 - Pironman IR receiver functionality, package documentation and app-store icons: [home-assistant-addon](https://github.com/ChristophKomenda/home-assistant-addon).
+- Bitcoin Node Monitor functionality, documentation and app-store icons: [bitcoin-node-monitor](https://github.com/ChristophKomenda/bitcoin-node-monitor).
 - Central distribution, synchronization, build validation and catalog artwork: this repository.
 
 Do not directly edit imported app directories or regenerate hashes to hide changes. Import a published upstream release instead.

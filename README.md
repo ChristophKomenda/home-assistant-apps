@@ -23,6 +23,8 @@
 | <img src="assets/powerline2mqtt.svg" width="40" alt=""> **[Powerline2MQTT](powerline2mqtt)** | Local HomePlug monitoring via MQTT | ARM64 Docker tested; HAOS experimental |
 | <img src="assets/pironman-ir-receiver.svg" width="40" alt=""> **[Pironman IR Receiver](pironman-ir-receiver)** | Local infrared reception on Pironman 5 Max | Independently tested in original HAOS repository; central distribution not runtime tested |
 
+| <img src="assets/bitcoin-node-monitor.svg" width="40" alt=""> **[Bitcoin Node Monitor](bitcoin-node-monitor)** | Local Bitcoin Core monitoring via MQTT | Experimental; live RPC and HAOS validation pending |
+
 ### Powerline2MQTT
 
 Monitor compatible Powerline adapters without cloud services or adapter IP addresses. Automatically discover Home Assistant devices, physical link rates, connectivity and bridge diagnostics. RC.2 was tested with three adapters and 31 available entities on one ARM64 installation. G.hn is not supported.
@@ -35,6 +37,23 @@ Use the Pironman 5 Max infrared receiver locally with HAIR and the existing Piro
 
 [Setup and requirements](pironman-ir-receiver/README.md) · [Source project](https://github.com/ChristophKomenda/home-assistant-addon) · [HACS integration](https://github.com/ChristophKomenda/pironman5-homeassistant-container)
 
+### Bitcoin Node Monitor
+
+Monitor an existing Bitcoin Core node through restricted RPC
+and automatic MQTT discovery.
+
+- 19 monitoring entities
+- Blockchain synchronization and peer statistics
+- Network traffic and node uptime
+- TLS support and certificate verification
+- No Docker socket or privileged container required
+
+Requires a securely reachable Bitcoin Core RPC endpoint,
+server-side method restrictions and an MQTT broker.
+Never expose Bitcoin RPC directly to the internet.
+
+[Setup and security](bitcoin-node-monitor/DOCS.md) · [Source project](https://github.com/ChristophKomenda/bitcoin-node-monitor) · [Changelog](bitcoin-node-monitor/CHANGELOG.md)
+
 ## Installation
 
 1. Use the installation button above, or add `https://github.com/ChristophKomenda/home-assistant-apps` to the Home Assistant OS app store repositories.
@@ -42,11 +61,11 @@ Use the Pironman 5 Max infrared receiver locally with HAIR and the existing Piro
 3. Configure it, start it and inspect its logs. Powerline2MQTT requires a reachable MQTT broker and the correct physical Ethernet interface. IR requires compatible hardware and host configuration.
 
 > [!IMPORTANT]
-> This is an independent community repository, not an official Home Assistant or SunFounder app store. Both packages still require installation/runtime validation from this central repository. Existing installations in another repository have different Supervisor IDs. Back up configuration, stop the old app before starting its replacement, and do not run duplicate MQTT collectors with the same node ID.
+> This is an independent community repository, not an official Home Assistant or SunFounder app store. All packages still require installation/runtime validation from this central repository. Existing installations in another repository have different Supervisor IDs. Back up configuration, stop the old app before starting its replacement, and do not run duplicate MQTT collectors with the same node ID.
 
 ## Updates and validation
 
-Published upstream releases are checked daily and on manual workflow dispatch. Updates generate reviewable pull requests and never merge automatically. Powerline2MQTT accepts newer prereleases until a stable version is installed; the IR receiver accepts stable `pironman-ir-v*` releases only.
+Published upstream releases are checked daily and on manual workflow dispatch. Updates generate reviewable pull requests and never merge automatically. Powerline2MQTT and Bitcoin Node Monitor accept newer prereleases until a stable version is installed; the IR receiver accepts stable `pironman-ir-v*` releases only.
 
 - [Pinned upstream sources](SOURCES.md) and [`sources.lock.json`](sources.lock.json) record exact versions, commits and content hashes.
 - Static CI validates package syntax and provenance; separate native ARM64/AMD64 Docker build checks cover declared architectures. These are build checks, not hardware or HAOS runtime tests.
@@ -57,8 +76,6 @@ Published upstream releases are checked daily and on manual workflow dispatch. U
 ## Support
 
 Report app-specific issues in the linked source project; report distribution or synchronization issues [here](https://github.com/ChristophKomenda/home-assistant-apps/issues). See [contributing](CONTRIBUTING.md) and [security](SECURITY.md).
-
-**Planned:** Bitcoin Node Monitor (not available for installation).
 
 ## Licensing
 

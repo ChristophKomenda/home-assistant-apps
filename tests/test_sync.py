@@ -24,3 +24,17 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(select(r,'pironman-ir-v','0.2.0',False)[1],'pironman-ir-v0.2.1')
     def test_inconsistent_flag(self):
         self.assertIsNone(select([release('v0.1.0-rc.3')],'v','0.1.0-rc.2',True))
+
+    def test_bitcoin_prerelease_channel(self):
+        r = [release('v0.1.0-alpha.2', True),
+             release('v0.1.0-alpha.1', True)]
+        self.assertEqual(
+            select(r, 'v', '0.1.0-alpha.1', True)[1],
+            'v0.1.0-alpha.2',
+        )
+
+    def test_bitcoin_stable_channel(self):
+        r = [release('v0.2.0-alpha.1', True)]
+        self.assertIsNone(
+            select(r, 'v', '0.1.0', True)
+        )

@@ -16,6 +16,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / 'sources.lock.json'
 APPS = {
+    'bitcoin-node-monitor': ('ChristophKomenda/bitcoin-node-monitor', 'bitcoin-node-monitor', 'v', True),
     'powerline2mqtt': ('ChristophKomenda/powerline2mqtt', 'haos', 'v', True),
     'pironman-ir-receiver': ('ChristophKomenda/home-assistant-addon', 'pironman-ir-receiver', 'pironman-ir-v', False),
 }
@@ -90,7 +91,7 @@ def validate(lock):
             raise ValueError(f'{slug}: invalid commit')
         if validate_app(ROOT/slug, slug, entry['version']) != entry['sha256']:
             raise ValueError(f'{slug}: content differs from lock; change upstream instead')
-    print('Validated both app packages, provenance and content hashes.')
+    print('Validated all app packages, provenance and content hashes.')
 
 def import_release(repo, directory, tag, dest, temp):
     gitdir = temp/'git'
