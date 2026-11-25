@@ -1,0 +1,42 @@
+name: Build app packages
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    name: ${{ matrix.app }} / ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: powerline2mqtt
+            arch: amd64
+            runner: ubuntu-24.04
+          - app: powerline2mqtt
+            arch: aarch64
+            runner: ubuntu-24.04-arm
+          - app: pironman-ir-receiver
+            arch: aarch64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Install validation dependency
+        run: |
+          python3 -m venv /tmp/app-build-venv
+          /tmp/app-build-venv/bin/pip install PyYAML==6.0.2
+      - name: Validate coverage and build native image
+        env:
+          APP: ${{ matrix.app }}
+          ARCH: ${{ matrix.arch }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          /tmp/app-build-venv/bin/python scripts/sync_upstream.py --check
+          /tmp/app-build-venv/bin/python scripts/build_app.py "$APP" "$ARCH"
