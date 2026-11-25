@@ -1,5 +1,5 @@
 name: Bitcoin Node Monitor (experimental)
-version: "0.1.0-alpha.1"
+version: "0.1.0-alpha.2"
 slug: bitcoin-node-monitor
 description: Restricted Bitcoin Core monitoring via MQTT
 url: https://github.com/ChristophKomenda/bitcoin-node-monitor
