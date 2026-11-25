@@ -1,0 +1,18 @@
+{
+  "pironman-ir-receiver": {
+    "commit": "17e80beac7bacc5c1df9bd488ec95ed139cc746a",
+    "directory": "pironman-ir-receiver",
+    "repository": "ChristophKomenda/home-assistant-addon",
+    "sha256": "88f5844ebc9f37ffbdfd776517386ec96b81b8b4da12fb0b404e049d0550447c",
+    "tag": "pironman-ir-v0.2.0",
+    "version": "0.2.0"
+  },
+  "powerline2mqtt": {
+    "commit": "1c5b39ac534d9da9b8a46f622334da7b92fc873e",
+    "directory": "haos",
+    "repository": "ChristophKomenda/powerline2mqtt",
+    "sha256": "da58766011a105d079255a9696bf67f28a21986584e1916e4b21a5cd6217c03a",
+    "tag": "v0.1.0-rc.2",
+    "version": "0.1.0-rc.2"
+  }
+}

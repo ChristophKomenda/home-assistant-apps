@@ -13,10 +13,10 @@ Alternatively, add this repository through Settings > Apps.
 
 ## Available apps
 
-| App | Version | Validation |
+| App | Release channel | Validation |
 | --- | --- | --- |
-| [Powerline2MQTT](powerline2mqtt) | 0.1.0-rc.2 | Docker ARM64 validated; HAOS experimental |
-| [Pironman IR Receiver](pironman-ir-receiver) | 0.2.0 | Independent HAOS testing in original repository |
+| [Powerline2MQTT](powerline2mqtt) | Experimental / release candidate | Docker ARM64 validated; HAOS experimental |
+| [Pironman IR Receiver](pironman-ir-receiver) | Stable upstream releases | Independent HAOS testing in original repository |
 
 ### Powerline2MQTT
 
@@ -65,3 +65,7 @@ See the corresponding app directories.
 [Christoph Komenda](https://github.com/ChristophKomenda)
 
 Independent community projects, not official Home Assistant apps.
+
+## Release synchronization
+
+Published upstream releases are checked daily and on manual workflow dispatch. Updates open a pull request, never merge automatically. Powerline2MQTT accepts newer prereleases until a stable version is installed; the IR receiver accepts stable `pironman-ir-v*` releases only. See [pinned sources](SOURCES.md) and `sources.lock.json` for exact versions and commits. App directories are upstream-owned; make fixes and branding changes in the source projects. Static checks do not replace HAOS runtime tests or dependency license review. Existing app installations from other repositories are not migrated automatically.

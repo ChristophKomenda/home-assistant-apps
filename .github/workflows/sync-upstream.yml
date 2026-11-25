@@ -1,0 +1,56 @@
+name: Sync upstream app releases
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: upstream-app-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check for existing update PR
+        id: pending
+        shell: bash
+        run: |
+          count=$(gh pr list --state open --base main --limit 100 --json headRefName --jq '[.[] | select(.headRefName | startswith("automation/upstream-sync-"))] | length')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+      - name: Install validation dependency
+        if: steps.pending.outputs.count == '0'
+        run: python3 -m pip install --break-system-packages PyYAML==6.0.2
+      - name: Validate and synchronize sources
+        if: steps.pending.outputs.count == '0'
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 scripts/sync_upstream.py
+          git diff --check
+      - name: Open reviewable update PR
+        if: steps.pending.outputs.count == '0'
+        shell: bash
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo 'All apps up to date.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          branch="automation/upstream-sync-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git add -- powerline2mqtt pironman-ir-receiver SOURCES.md sources.lock.json
+          git diff --cached --check
+          git commit -m 'chore: synchronize published upstream app releases'
+          # No force push: preserve any existing branch for manual review.
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch" \
+            --title 'chore: synchronize upstream app releases' \
+            --body 'Published releases imported from resolved commits. Static validation and selection tests passed. Review changes, permissions, licenses and HAOS runtime compatibility before merging. No automatic merge.'
