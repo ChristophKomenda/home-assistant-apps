@@ -9,6 +9,7 @@ Use the GitHub repository Security tab and private vulnerability reporting if en
 ## Operational guidance
 
 - Use a dedicated, scoped MQTT account and a trusted local network; do not expose MQTT publicly.
+- Use dedicated, server-side restricted Bitcoin RPC credentials and verified TLS. Never expose RPC publicly.
 - Keep Home Assistant and dependencies updated, and review requested device/network capabilities before installation.
 - Do not run duplicate instances against the same hardware or MQTT identity.
 - Upstream import checks verify recorded content integrity; they are not an independent signature or security audit.

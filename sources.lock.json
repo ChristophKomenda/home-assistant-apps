@@ -1,4 +1,12 @@
 {
+  "bitcoin-node-monitor": {
+    "commit": "da5bc9b170d53c495aa73ffb4d598f11bd7b8992",
+    "directory": "bitcoin-node-monitor",
+    "repository": "ChristophKomenda/bitcoin-node-monitor",
+    "sha256": "2027e9e203723b8772d7c44ff3f5abc43b3c43c6b27c1e41947e631762c30b49",
+    "tag": "v0.1.0-alpha.1",
+    "version": "0.1.0-alpha.1"
+  },
   "pironman-ir-receiver": {
     "commit": "17e80beac7bacc5c1df9bd488ec95ed139cc746a",
     "directory": "pironman-ir-receiver",

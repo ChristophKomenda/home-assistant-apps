@@ -15,6 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - app: bitcoin-node-monitor
+            arch: amd64
+            runner: ubuntu-24.04
+          - app: bitcoin-node-monitor
+            arch: aarch64
+            runner: ubuntu-24.04-arm
           - app: powerline2mqtt
             arch: amd64
             runner: ubuntu-24.04
