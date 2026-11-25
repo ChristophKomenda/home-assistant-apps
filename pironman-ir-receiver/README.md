@@ -14,6 +14,12 @@ in `standalone` mode, the separately installed `sunfounder_ir` companion does so
 
 This is **receive-only**. It does not turn the IR receiver into a transmitter.
 
+## Find your setup path
+
+- **New HAOS installation:** Use the [recommended Pironman 5 HACS-linked path](#recommended-use-the-existing-pironman-5-hacs-integration-no-manual-copying).
+- **Existing standalone user:** Keep your current setup, or follow [legacy instructions](#legacy-standalone-installation).
+- **Only need monitoring, fan, RGB or OLED controls?** Install the [Pironman 5 HACS integration](https://github.com/ChristophKomenda/pironman5-homeassistant-container); this IR add-on is optional.
+
 ## Requirements
 
 - Raspberry Pi 5 with Pironman 5 Max; Home Assistant OS on aarch64.
@@ -33,7 +39,9 @@ This avoids installing the standalone `sunfounder_ir` custom component.
 2. Add/configure the Pironman 5 device using its reachable REST API (normally port `34001`).
 3. Under the Pironman 5 integration options enable the experimental IR receiver, and
    set its **IR bridge device ID** to exactly the add-on `receiver_id`.
-4. Install **Pironman IR Receiver** from this community add-on repository, using:
+4. In Home Assistant's **Add-on Store → ⋮ → Repositories**, add
+   `https://github.com/ChristophKomenda/home-assistant-addon`, then
+   install **Pironman IR Receiver v0.2.0+** with:
 
    ```yaml
    receiver_id: pironman5-max
@@ -64,10 +72,9 @@ transmission requires separate compatible hardware.
 This is one successful independent installation; compatibility on other
 HAOS versions and hardware revisions remains to be tested.
 
-## Legacy standalone installation (v0.1.1)
+## Legacy standalone installation
 
-The experimental Pironman IR Receiver add-on is available
-for community testing from this independently maintained repository.
+**Existing users only:** This alternate route uses a separately installed `sunfounder_ir` custom component. For a fresh installation, prefer the [HACS-linked mode](#recommended-use-the-existing-pironman-5-hacs-integration-no-manual-copying). Version 0.2.0 retains backwards compatibility with this mode.
 
 ### Installation
 
@@ -77,7 +84,7 @@ for community testing from this independently maintained repository.
    `https://github.com/ChristophKomenda/home-assistant-addon`
 
 3. Refresh the repository.
-4. Install **Pironman IR Receiver v0.1.1**.
+4. Install **Pironman IR Receiver v0.2.0 or newer**.
 5. Configure the add-on:
 
    ```yaml
@@ -119,22 +126,14 @@ Home Assistant OS versions is welcome.
 
 ## Installation checklist for this community repository
 
-1. In **Settings > Add-ons / Apps > Add-on Store**, add the community
-   repository `https://github.com/ChristophKomenda/home-assistant-addon`.
-2. Install **Pironman IR Receiver**. This is separate from the main Pironman 5
-   Max add-on, so existing fan, RGB and display operations are unaffected.
-3. Confirm `/dev/lirc0` exists. The app requires this device to start.
-4. Configure `receiver_id` (e.g. `pironman5-max`) and start the app.
-5. Copy `ha_custom_component/sunfounder_ir/` to Home Assistant's
-   `/config/custom_components/sunfounder_ir/` and restart Home Assistant.
-6. Under **Settings > Devices & Services > Add Integration**, choose
-   **SunFounder IR Receiver**, using the **same** receiver ID.
-7. Open HAIR > Sniffer and select the SunFounder receiver.
+For the **recommended `pironman5` mode**, use the [guided steps above](#recommended-use-the-existing-pironman-5-hacs-integration-no-manual-copying) or the [short main README](../Readme.MD#quick-start-recommended-setup).
 
-The custom component is an independent manually installed companion; add-on
-installation **does not automatically install custom integrations**. A later
-HACS listing could streamline this without adding a dependency on another
-project.
+- Add the repository `https://github.com/ChristophKomenda/home-assistant-addon` to the HAOS Add-on Store.
+- Confirm the receiver is exposed as `/dev/lirc0` **before** starting the add-on.
+- Select `event_mode: pironman5`, and match `receiver_id` to the HACS Pironman 5 **IR bridge device ID**.
+- Start the add-on, **reload the Pironman 5 integration**, then select its receiver in **HAIR → Sniffer**.
+
+**Only for `event_mode: standalone`:** The older manual `sunfounder_ir` copy is still required. See [legacy standalone installation](#legacy-standalone-installation). Do not install it for the recommended mode.
 
 ## Security / behavior
 
@@ -262,11 +261,14 @@ If HAIR detects the receiver entity but does not display signals:
    process is consuming the LIRC stream.
 3. If captured frames appear but no delivery messages follow, check for
    Supervisor HTTP errors and confirm `homeassistant_api: true`.
-4. In Home Assistant Developer Tools > Events, listen for
-   `sunfounder_ir_received`. The `receiver_id` in the event must match the ID
-   configured in the **SunFounder IR Receiver** custom integration.
-5. If events arrive, select **SunFounder IR Receiver** in HAIR > Sniffer rather
-   than a different Pironman or ESPHome receiver.
+4. In **Developer Tools → Events**, listen for the event matching your mode:
+   `pironman5_ir_raw_received` in **`pironman5` mode**, or
+   `sunfounder_ir_received` in **`standalone` mode**. Verify the event's
+   `device_id` (Pironman mode) or `receiver_id` (standalone mode) matches the
+   corresponding integration configuration.
+5. If events arrive, select the correct receiver in **HAIR → Sniffer**:
+   **Pironman 5** in `pironman5` mode, **SunFounder IR Receiver** in
+   standalone mode. After switching modes, reload the Pironman 5 integration.
 
 The Dockerfile uses `with-contenv` when launching Python because Home Assistant
 base images run s6-overlay and environment variables injected into the app
