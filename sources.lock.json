@@ -8,12 +8,12 @@
     "version": "0.1.0-alpha.2"
   },
   "infrastructure-ha-monitor": {
-    "commit": "e506ae9eac9a06a5fbc9d71a868b2ddd52c54368",
+    "commit": "5184c307a881dbf169862b8befba89a63f9b9b90",
     "directory": "haos",
     "repository": "ChristophKomenda/infrastructure-ha-monitor",
-    "sha256": "bfa6c598f93e5e147b01f63724becdaa073005aa77770051e4e04c2fee026133",
-    "tag": "haos-v0.1.0-alpha.1",
-    "version": "0.1.0-alpha.1"
+    "sha256": "559642cb3719d0f9df953d887daf12753d3ec76ed3f2286d12f68a89f030e074",
+    "tag": "haos-v0.1.0-alpha.2",
+    "version": "0.1.0-alpha.2"
   },
   "pironman-ir-receiver": {
     "commit": "7cf41dcaf6668eae786acac45f449658967dba99",
