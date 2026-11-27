@@ -16,6 +16,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / 'sources.lock.json'
 APPS = {
+    'infrastructure-ha-monitor': ('ChristophKomenda/infrastructure-ha-monitor', 'haos', 'haos-v', True),
     'bitcoin-node-monitor': ('ChristophKomenda/bitcoin-node-monitor', 'bitcoin-node-monitor', 'v', True),
     'powerline2mqtt': ('ChristophKomenda/powerline2mqtt', 'haos', 'v', True),
     'pironman-ir-receiver': ('ChristophKomenda/home-assistant-addon', 'pironman-ir-receiver', 'pironman-ir-v', False),
