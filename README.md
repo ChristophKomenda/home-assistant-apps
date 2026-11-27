@@ -20,7 +20,7 @@
 
 | App | What it does | Validation |
 | --- | --- | --- |
-| **[Infrastructure HA Monitor](infrastructure-ha-monitor)** | Cross-host MQTT incident correlation | Experimental; HAOS runtime validation pending |
+| <img src="assets/infrastructure-ha-monitor.svg" width="40" alt=""> **[Infrastructure HA Monitor](infrastructure-ha-monitor)** | Cross-host MQTT incident correlation | Experimental; HAOS runtime validation pending |
 | <img src="assets/powerline2mqtt.svg" width="40" alt=""> **[Powerline2MQTT](powerline2mqtt)** | Local HomePlug monitoring via MQTT | ARM64 Docker tested; HAOS experimental |
 | <img src="assets/pironman-ir-receiver.svg" width="40" alt=""> **[Pironman IR Receiver](pironman-ir-receiver)** | Local infrared reception on Pironman 5 Max | Independently tested in original HAOS repository; central distribution not runtime tested |
 | <img src="assets/bitcoin-node-monitor.svg" width="40" alt=""> **[Bitcoin Node Monitor](bitcoin-node-monitor)** | Local Bitcoin Core monitoring via MQTT | Experimental; live RPC and HAOS validation pending |
