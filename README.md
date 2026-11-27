@@ -2,7 +2,7 @@
 
 <img src="assets/community-logo.svg" width="440" alt="Community Apps — Local-first home automation">
 
-# Home Assistant Community Apps
+# Home Assistant Community Apps and Add-ons — Local-first Monitoring
 
 **Local-first hardware monitoring and automation. One repository, multiple apps.**
 
@@ -81,3 +81,17 @@ Report app-specific issues in the linked source project; report distribution or 
 Each app retains its original license and copyright notices. See its directory. Repository artwork is original to this project; see [asset license](assets/LICENSE.md).
 
 Maintained by [Christoph Komenda](https://github.com/ChristophKomenda).
+
+<!-- github-seo:begin -->
+
+## Frequently asked questions — quick answers
+
+### How do I install these Home Assistant community apps?
+
+Use the repository installation link and follow the Installation section. Review each app’s validation status and documentation first.
+
+### Are all apps production-ready on Home Assistant OS?
+
+Not necessarily. The app catalog documents validation status separately for each app; experimental packaging is not equivalent to runtime validation.
+
+<!-- github-seo:end -->
