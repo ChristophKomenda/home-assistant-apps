@@ -7,7 +7,8 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-COVERAGE = {"bitcoin-node-monitor": {"amd64", "aarch64"},
+COVERAGE = {"infrastructure-ha-monitor": {"amd64", "aarch64"},
+            "bitcoin-node-monitor": {"amd64", "aarch64"},
             "powerline2mqtt": {"amd64", "aarch64"},
             "pironman-ir-receiver": {"aarch64"}}
 
